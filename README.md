@@ -1,6 +1,7 @@
 # library-management
 API that manages library.
 
+[Download the API file](https://raw.githubusercontent.com/nirinaHelena/library-management/TD_CM/docs/api.yml)
 
 # Ecriture d'une spécification OAS
 
