@@ -71,7 +71,6 @@ components:
         releaseDate:
           type: string
           format: date
-
     Author:
       type: object
       properties:
