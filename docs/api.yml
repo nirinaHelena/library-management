@@ -2,19 +2,19 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22054
 servers:
   - url: https://library.com
 paths:
   /books:
     get:
       summary: Get all books
-      description: The returned books are ordered by updated datetime.
+      description: Retrieve all books, ordered by updated datetime.
       operationId: getBooks
       parameters:
         - in: query
           name: bookName
-          description: Filter return books by given name
+          description: Filter books by name
           required: false
           schema:
             type: string
@@ -34,7 +34,7 @@ paths:
             format: date
       responses:
         200:
-          description: The list of filtered books
+          description: List of filtered books
           content:
             application/json:
               schema:
@@ -53,7 +53,7 @@ paths:
                 $ref: '#/components/schemas/Book'
       responses:
         200:
-          description: The list of created or updated books
+          description: List of created or updated books
           content:
             application/json:
               schema:
@@ -100,6 +100,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+  /authors/{authorId}:
     delete:
       summary: Delete an author by ID
       operationId: deleteAuthor
@@ -135,6 +136,7 @@ components:
         releaseDate:
           type: string
           format: date
+
     Author:
       type: object
       properties:
@@ -147,6 +149,3 @@ components:
           enum:
             - M
             - F
-
-
-      
