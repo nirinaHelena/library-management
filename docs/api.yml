@@ -41,6 +41,20 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: page
+          description: Page number for pagination (default is 1)
+          schema:
+            type: integer
+            default: 1
+          required: false
+        - in: query
+          name: pageSize
+          description: Number of page per book (default is 50)
+          schema:
+            type: integer
+            default: 50
+          required: false
       responses:
         200:
           description: The list of filtered books
