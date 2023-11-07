@@ -267,3 +267,7 @@ components:
 # 2.b.i: UpdateBookAuthor sert à ajouter/modifier
 # l'author du livre, donc on a besoin que le bookID
 # et authorId
+
+# 2.b.ii UpdateBookAuthor devrait avoir les propriétés
+# de CrupdateBook et de Author quand on voudrais 
+# faire une modification spécifique au livre
