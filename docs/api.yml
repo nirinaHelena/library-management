@@ -274,3 +274,8 @@ components:
 
 # 3.a les paginations sont nécessaires pour facilité
 # les recherches et rétrissir la liste des resultats
+
+# 4.a il est possible de gérer la pagination à traves
+# les en-têtes de la requête,
+# on peut utiliser la propriété range
+# mais seulement si le serveur l'implémente
