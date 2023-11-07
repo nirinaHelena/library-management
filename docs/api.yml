@@ -142,6 +142,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+  /boos/authors:
+    put:
+      summary: Update book's author in Bulk
+      operationId: updateBookAuthor
+      tags:
+        - Books
+      requestBody:
+        description: List of bookId and authorId pairs to update book authors
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
+      responses:
+        200:
+          description: The list of books with updated authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
   /authors/{aId}:
     delete:
       summary: Delete an author
