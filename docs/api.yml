@@ -263,4 +263,7 @@ components:
           type: string
         authorId:
           type: string
-    
+
+# 2.b.i: UpdateBookAuthor sert à ajouter/modifier
+# l'author du livre, donc on a besoin que le bookID
+# et authorId
