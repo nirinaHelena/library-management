@@ -271,3 +271,6 @@ components:
 # 2.b.ii UpdateBookAuthor devrait avoir les propriétés
 # de CrupdateBook et de Author quand on voudrais 
 # faire une modification spécifique au livre
+
+# 3.a les paginations sont nécessaires pour facilité
+# les recherches et rétrissir la liste des resultats
