@@ -205,4 +205,11 @@ components:
       enum:
         - M
         - F
+    UpdateBookAuthor:
+      type: object
+      properties:
+        bookId:
+          type: string
+        authorId:
+          type: string
     
