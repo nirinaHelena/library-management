@@ -228,10 +228,10 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/ImportBook'
-          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-            description: Excel file containing book data
-            type: string
-            format: binary  
+                - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+                    description: Excel file containing book data
+                    type: string
+                    format: binary  
       responses:
         200:
           description: List of imported books
@@ -257,11 +257,11 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/ImportAuthor'
-          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-            description: Excel file containing author data
-            type: string
-            format: binary 
+                - $ref: '#/components/schemas/ImportAuthors'
+                - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+                  description: Excel file containing author data
+                  type: string
+                  format: binary 
       responses:
         200:
           description: List of imported authors
