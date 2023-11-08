@@ -339,6 +339,13 @@ components:
           schema:
             $ref: '#/components/schemas/InternalServerException'
   schemas:
+    ImportAuthors:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          $ref: '#/components/schemas/Sex'
     ApiResponse:
       type: object
       properties:
@@ -385,6 +392,13 @@ components:
         - type: object
           properties:
             id:
+              type: string
+    ImportBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            idAuthor:
               type: string
     Book:
       type: object
