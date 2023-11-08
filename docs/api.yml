@@ -217,6 +217,66 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
+  /books/import:
+    post:
+      summary: import books from Excel or json
+      operationId: importBooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            description: Excel file containing book data
+            type: string
+            format: binary  
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SuccessResponse'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /authors/import:
+    post:
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportAuthor'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            description: Excel file containing author data
+            type: string
+            format: binary 
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SuccessResponse'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'             
   /authors/{aId}:
     delete:
       summary: Delete an author
