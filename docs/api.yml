@@ -348,7 +348,43 @@ paths:
         403:
           $ref: '#/components/responses/403'
         500:
-          $ref: '#/components/responses/500'             
+          $ref: '#/components/responses/500'
+  /authors/batch-delete:
+    delete:
+      summary: Batch Delete Authors
+      operationId: batchDeleteAuthors
+      tags:
+        - Authors
+      requestBody:
+        description: List of author IDs to be deleted
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        200:
+          description: List of authors deleted
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+             
   /authors/{aId}:
     delete:
       summary: Delete an author
