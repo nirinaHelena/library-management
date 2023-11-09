@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.5.1
+  version: 2.0.0
   description: STD22054
 servers:
   - url: https://library.com
@@ -724,6 +724,17 @@ components:
           type: string
         authorId:
           type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com
+          tokenUrl: https://example.com
+          scopes:
+            read: Permet la lecture des ressources
+            write: Permet l'écriture/modification des ressources
+            admin: Accès Administrator
 
 
 
