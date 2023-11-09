@@ -138,8 +138,6 @@ paths:
     
   /books/availability:
     get:
-      tags:
-        - Books
       summary: Get all available books or borrowed books 
       operationId: patati 
       tags:
