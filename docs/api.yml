@@ -17,6 +17,9 @@ paths:
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
+      security:
+        - oauth2: 
+          - read
       parameters:
         - in: query
           name: bookName
@@ -75,6 +78,10 @@ paths:
         - Books
       summary: Create or update a list of books
       operationId: crupdateBooks
+      security:
+        - oauth2: 
+          - write
+          - admin
       requestBody:
         content:
           application/json:
@@ -108,6 +115,9 @@ paths:
       tags:
         - Books
       operationId: bookAvailability
+      security:
+        - oauth2: 
+          - read
       parameters:
         - in: path
           name: idBook
@@ -139,9 +149,12 @@ paths:
   /books/availability:
     get:
       summary: Get all available books or borrowed books 
-      operationId: patati 
+      operationId: allBooksAvailability
       tags:
         - Books 
+      security:
+        - oauth2: 
+          - read
       parameters:
         - name: availability 
           in: query
@@ -176,6 +189,10 @@ paths:
         - Transactions
       summary: get list of books borrowed by a certain visitor
       operationId: getAllBookTransaction
+      security:
+        - oauth2: 
+          - write
+          - admin
       parameters:
         - name: visitorId 
           in: path 
@@ -228,6 +245,10 @@ paths:
       operationId: updateBookAuthor
       tags:
         - Books
+      security:
+        - oauth2: 
+          - write
+          - admin
       parameters:
         - name: bookId
           in: path
@@ -267,6 +288,9 @@ paths:
       operationId: getAuthorsByPagination
       tags:
         - Authors
+      security:
+        - oauth2: 
+          - read
       parameters:
         - $ref: '#/components/parameters/pathPagination'
       responses:
@@ -295,6 +319,9 @@ paths:
       operationId: getAuthors
       tags:
         - Authors
+      security:
+        - oauth2: 
+          - read
       parameters:
         - name: authorName
           in: query
@@ -336,6 +363,10 @@ paths:
       operationId: crupdateAuthors
       tags:
         - Authors
+      security:
+        - oauth2: 
+          - write
+          - admin
       requestBody:
         content:
           application/json:
@@ -369,6 +400,10 @@ paths:
       operationId: updateBooksAuthor
       tags:
         - Books
+      security:
+        - oauth2: 
+          - write
+          - admin
       requestBody:
         description: List of bookId and authorId pairs to update book authors
         content:
@@ -403,6 +438,10 @@ paths:
     post:
       summary: import books from Excel or json
       operationId: importBooks
+      security:
+        - oauth2: 
+          - write
+          - admin
       requestBody:
         required: true
         content:
@@ -438,6 +477,10 @@ paths:
     post:
       summary: Import authors from Excel or JSON
       operationId: importAuthors
+      security:
+        - oauth2: 
+          - write
+          - admin
       requestBody:
         required: true
         content:
@@ -474,6 +517,10 @@ paths:
     delete:
       summary: Batch Delete Authors
       operationId: batchDeleteAuthors
+      security:
+        - oauth2: 
+          - write
+          - admin
       tags:
         - Authors
       parameters:
@@ -509,6 +556,10 @@ paths:
     delete:
       summary: Delete an author
       operationId: deleteAuthor
+      security:
+        - oauth2: 
+          - write
+          - admin
       tags:
         - Authors
       parameters:
@@ -538,6 +589,10 @@ paths:
       tags:
         - Transactions
       operationId: bookTransaction 
+      security:
+        - oauth2: 
+          - write
+          - admin
       parameters:
         - in: path
           name: bookId
