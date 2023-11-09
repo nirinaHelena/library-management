@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.4.0
+  version: 1.5.0
   description: STD22054
 servers:
   - url: https://library.com
@@ -84,6 +84,39 @@ paths:
       responses:
         200:
           description: The list of created or updated books
+          content:
+            application/json:
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /books/{idBook}:
+    get:
+      summary: Get the availability of a specific book
+      tags:
+        - Books
+      operationId: bookAvailability
+      parameters:
+        - in: path
+          name: idBook
+          description: return books by given id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Book availability
           content:
             application/json:
               schema :
