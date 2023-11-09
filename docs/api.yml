@@ -8,6 +8,7 @@ servers:
 tags:
   - name: Books
   - name: Authors
+  - name: Transactions
 paths:
   /books:
     get:
@@ -137,6 +138,8 @@ paths:
     
   /books/availability:
     get:
+      tags:
+        - Books
       summary: Get all available books or borrowed books 
       operationId: patati 
       tags:
@@ -171,6 +174,8 @@ paths:
   
   /bookTransaction/visitor/{visitorId}:
     get:
+      tags:
+        - Transactions
       summary: get list of books borrowed by a certain visitor
       operationId: getAllBookTransaction
       parameters:
@@ -532,6 +537,8 @@ paths:
   /bookTransaction/book/{bookId}/visitor/{visitorId}:
     put:
       summary: Borrow a book
+      tags:
+        - Transactions
       operationId: bookTransaction 
       parameters:
         - in: path
