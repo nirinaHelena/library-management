@@ -355,15 +355,13 @@ paths:
       operationId: batchDeleteAuthors
       tags:
         - Authors
-      requestBody:
-        description: List of author IDs to be deleted
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: string
+      parameters:
+        - in: query
+          name: authorIds
+          description: Comma-separated list of author IDs to be deleted
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: List of authors deleted
@@ -384,6 +382,7 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
+
              
   /authors/{aId}:
     delete:
