@@ -410,6 +410,44 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
+          
+  /bookTransaction/book/{bookId}/visitor/{visitorId}:
+    put:
+      summary: Borrow a book
+      operationId: bookTransaction 
+      parameters:
+        - in: path
+          name: bookId
+          description: Id of the books borrowed
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visitorId
+          description: Id of the visitor who borrow a book
+          schema: 
+            type: string
+          required: true
+      responses:
+        200:
+          description: The book has been borrowed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items: 
+                          $ref: '#/components/schemas/BookTransaction'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
 components:
   parameters:
     queryPagination:
