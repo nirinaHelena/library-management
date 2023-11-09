@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.1.1
+  version: 1.2.8
   description: STD22054
 servers:
   - url: https://library.com
 tags:
-  - Books
-  - Authors
+  - name: Books
+  - name: Authors
 paths:
   /books:
     get:
@@ -54,10 +54,15 @@ paths:
           description: The list of filtered books
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -81,10 +86,15 @@ paths:
           description: The list of created or updated books
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -115,8 +125,43 @@ paths:
           description: The book with update author
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /authors/{pathPagination}:
+    get:
+      summary: Get authors by pagination
+      operationId: getAuthorsByPagination
+      tags:
+        - Authors
+      parameters:
+        - $ref: '#/components/parameters/pathPagination'
+      responses:
+        200:
+          description: Author list by pagination
+          content:
+            application/json:
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -138,7 +183,6 @@ paths:
           schema:
             type: string
           required: false
-        - $ref: '#/components/parameters/pathPagination'
         - in: query
           name: pageSize
           description: Number of items per page
@@ -151,10 +195,15 @@ paths:
           description: The list of filtered authors
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -178,20 +227,25 @@ paths:
           description: The list of created or updated authors
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
-  /boos/authors:
+  /books/authors:
     put:
       summary: Update book's author in Bulk
-      operationId: updateBookAuthor
+      operationId: updateBooksAuthor
       tags:
         - Books
       requestBody:
@@ -207,13 +261,20 @@ paths:
           description: The list of books with updated authors
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
         400: 
           $ref: '#/components/responses/400'
+
         403:
+
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
@@ -226,21 +287,26 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-                - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-                    description: Excel file containing book data
-                    type: string
-                    format: binary  
+              $ref: '#/components/schemas/ImportBook'
+          application/vnd.ms-excel:
+            schema:
+              description: Excel file containing book data
+              type: string
+              format: binary
       responses:
         200:
           description: List of imported books
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -258,19 +324,25 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/ImportAuthors'
-                - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-                  description: Excel file containing author data
-                  type: string
-                  format: binary 
+          application/vnd.ms-excel:
+            schema:
+              description: Excel file containing author data
+              type: string
+              format: binary
       responses:
         200:
           description: List of imported authors
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SuccessResponse'
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -339,6 +411,13 @@ components:
           schema:
             $ref: '#/components/schemas/InternalServerException'
   schemas:
+    ImportBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            idAuthor:
+              type: string
     ImportAuthors:
       type: object
       properties:
@@ -362,41 +441,31 @@ components:
       allOf:
         - $ref: '#/components/schemas/ApiResponse'
         - type: object
-          properties:
-            data:
-              type: object
     InternalServerException:
       allOf:
         - $ref: '#/components/schemas/ApiResponse'
         - type: object
-          properties:
-            data:
-              type: object
     Forbiden:
       allOf:
         - $ref: '#/components/schemas/ApiResponse'
         - type: object
-          properties:
-            data:
-              type: object
     BadRequest:
       allOf:
         - $ref: '#/components/schemas/ApiResponse'
         - type: object
-          properties:
-            data:
-              type: object
     CrupdateBook:
       allOf:
         - $ref: '#/components/schemas/Book'
         - type: object
-    ImportBook:
-      allOf:
-        - $ref: '#/components/schemas/Book'
-        - type: object
-          properties:
-            idAuthor:
-              type: string
+    Visitors:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference:
+          type: string
     Book:
       type: object
       properties:
