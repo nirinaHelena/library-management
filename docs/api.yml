@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.5.0
+  version: 1.5.1
   description: STD22054
 servers:
   - url: https://library.com
@@ -597,6 +597,10 @@ components:
     CrupdateBook:
       allOf:
         - $ref: '#/components/schemas/Book'
+        - type: object
+    Administrator:
+      allOf:
+        - $ref: '#/components/schemas/Visitors'
         - type: object
     Visitors:
       type: object
