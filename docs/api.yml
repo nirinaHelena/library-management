@@ -168,7 +168,57 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
-        
+  
+  /bookTransaction/visitor/{visitorId}:
+    get:
+      summary: get list of books borrowed by a certain visitor
+      operationId: getAllBookTransaction
+      parameters:
+        - name: visitorId 
+          in: path 
+          description: The Id of the visitor
+          schema: 
+            type: string
+          required: true
+        - in: query
+          name: releaseDateTimeMin
+          description: |
+            If  `releaseDateMax` is not provided, `releaseDateMin` is ignored.
+            `releaseDateMin` can not be after `releaseDateMax`.
+          schema:
+            type: string
+            format: datetime
+          required: false
+        - in: query
+          name: releaseDateTimeMax
+          description: |
+            If  `releaseDateMin` is not provided, `releaseDateMax` is ignored.
+            `releaseDateMax` can not be after `releaseDateMin`.
+          schema:
+            type: string
+            format: datetime
+          required: false
+      responses:
+        200:
+          description: The book with update author
+          content:
+            application/json:
+              schema :
+                allOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+          
   /books/{bookId}/authors/{authorId}:
     put:
       summary: Update Book's Author
