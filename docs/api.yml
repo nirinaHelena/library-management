@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.3.0
+  version: 1.3.1
   description: STD22054
 servers:
   - url: https://library.com
@@ -535,6 +535,20 @@ components:
       enum:
         - M
         - F
+    BookTransaction:
+      type: object
+      properties:
+        bookId:
+          type: string
+        visitorId:
+          type: string
+        borrowDate:
+          type: string
+          format: date
+        returnDate:
+          type: string
+          format: date
+          default: null
     UpdateBookAuthor:
       type: object
       properties:
