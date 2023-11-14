@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 2.0.0
+  version: 2.1.0
   description: STD22054
 servers:
   - url: https://library.com
@@ -9,6 +9,7 @@ tags:
   - name: Books
   - name: Authors
   - name: Transactions
+  - name: 
 paths:
   /books:
     get:
@@ -505,7 +506,32 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
-          
+  /visitors:
+    get:
+      summary: List of visitor
+      tags:
+        - Visitor
+      operationId: visitorList
+      responses:
+        200:
+          description: Visitor list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Visitors'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
   /bookTransaction/book/{bookId}/visitor/{visitorId}:
     put:
       summary: Borrow a book
