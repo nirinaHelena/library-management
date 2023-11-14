@@ -55,18 +55,7 @@ paths:
           required: false
       responses:
         200:
-          description: The list of filtered books
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -91,18 +80,7 @@ paths:
                 $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
-          description: The list of created or updated books
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -127,18 +105,7 @@ paths:
             type: string
       responses:
         200:
-          description: Book availability
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -164,18 +131,7 @@ paths:
           required: true
       responses:
         200:
-          description: The list of filtered books
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -220,18 +176,7 @@ paths:
           required: false
       responses:
         200:
-          description: The book with update author
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -264,18 +209,7 @@ paths:
           required: true
       responses:
         200:
-          description: The book with update author
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -300,7 +234,7 @@ paths:
             application/json:
               schema :
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -345,7 +279,7 @@ paths:
             application/json:
               schema :
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -381,7 +315,7 @@ paths:
             application/json:
               schema :
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -414,18 +348,7 @@ paths:
                 $ref: '#/components/schemas/UpdateBookAuthor'
       responses:
         200:
-          description: The list of books with updated authors
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
 
@@ -437,6 +360,8 @@ paths:
   /books/import:
     post:
       summary: import books from Excel or json
+      tags:
+        - Books
       operationId: importBooks
       security:
         - oauth2: 
@@ -455,18 +380,7 @@ paths:
               format: binary
       responses:
         200:
-          description: List of imported books
-          content:
-            application/json:
-              schema :
-                allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - type: object
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/BookList_200'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -476,6 +390,8 @@ paths:
   /authors/import:
     post:
       summary: Import authors from Excel or JSON
+      tags:
+        - Authors
       operationId: importAuthors
       security:
         - oauth2: 
@@ -500,7 +416,7 @@ paths:
             application/json:
               schema :
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -537,7 +453,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -575,7 +491,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessResponse'
+                allOf:
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
         400: 
           $ref: '#/components/responses/400'
         403:
@@ -613,7 +536,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
                   - type: object
                     properties:
                       body:
@@ -643,19 +566,25 @@ components:
         type: integer
         default: 1
   responses:
-    '400':
+    BookList_200:
+      description: List of books
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookList'
+    400:
       description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequest'
-    '403':
+    403:
       description: Forbiden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Forbiden'
-    '500':
+    500:
       description: Internal server error
       content:
         application/json:
@@ -676,34 +605,53 @@ components:
           type: string
         sex:
           $ref: '#/components/schemas/Sex'
-    ApiResponse:
+    ResponseStatus:
+      type: object
+      properties:
+          code:
+            type: integer
+            example: 200
+          message:
+            type: string
+            example: OK
+    ResponseBodyTemplate:
       type: object
       properties:
         status:
-          type: object
-          properties:
-            code:
-              type: integer
-            message:
-              type: string
+          $ref: '#/components/schemas/ResponseStatus'
         body:
           type: object
-    SuccessResponse:
+    BookList:
       allOf:
-        - $ref: '#/components/schemas/ApiResponse'
-        - type: object
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: '#/components/schemas/Book'
     InternalServerException:
       allOf:
-        - $ref: '#/components/schemas/ApiResponse'
-        - type: object
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 500
+          message: Internal Server Exception
+        body: { }
     Forbiden:
       allOf:
-        - $ref: '#/components/schemas/ApiResponse'
-        - type: object
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status: 
+          code: 403
+          message: Forbiden
+        body: { }
     BadRequest:
       allOf:
-        - $ref: '#/components/schemas/ApiResponse'
-        - type: object
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 400
+          message: Bad request 
     CrupdateBook:
       allOf:
         - $ref: '#/components/schemas/Book'
