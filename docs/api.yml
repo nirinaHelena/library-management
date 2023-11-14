@@ -512,6 +512,56 @@ paths:
       tags:
         - Visitor
       operationId: visitorList
+      security:
+        - oauth2: 
+          - write
+          - admin
+      responses:
+        200:
+          description: Visitor list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseBodyTemplate'
+                  - type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Visitors'
+        400: 
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: create a new Visitor
+      tags:
+        - Visitor
+      operationId: putVisitor
+      security:
+        - oauth2:
+          - write
+          - admin
+      parameters:
+        - in: path
+          name: visitorId
+          description: visitor's Id
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visitorName
+          schema: 
+            type: string
+          required: true
+        - in: path
+          name: visitorReference
+          schema: 
+            type: string
+          required: true
       responses:
         200:
           description: Visitor list
@@ -689,11 +739,11 @@ components:
     Visitors:
       type: object
       properties:
-        id:
+        visitorId:
           type: string
-        name:
+        visitorName:
           type: string
-        reference:
+        visitorReference:
           type: string
     Book:
       type: object
